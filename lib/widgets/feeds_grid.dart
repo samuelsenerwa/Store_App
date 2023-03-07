@@ -4,8 +4,8 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 
 import '../consts/global_colors.dart';
 
-class FeedWidget extends StatelessWidget {
-  const FeedWidget({Key? key}) : super(key: key);
+class FeedsWidget extends StatelessWidget {
+  const FeedsWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

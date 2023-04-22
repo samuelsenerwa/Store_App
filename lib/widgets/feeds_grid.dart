@@ -31,7 +31,7 @@ class FeedsWidget extends StatelessWidget {
                         text: TextSpan(
                             text: '\$',
                             style: const TextStyle(
-                                color: Color.fromARGB(35, 150, 243, 1)),
+                                color: Color.fromARGB(33, 207, 12, 136)),
                             children: <TextSpan>[
                               TextSpan(
                                   text: "150.00",

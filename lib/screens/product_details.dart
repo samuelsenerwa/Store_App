@@ -5,7 +5,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 
 class ProductDetails extends StatefulWidget {
-  const ProductDetails({super.key});
+  const ProductDetails({super.key, required String id});
 
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
@@ -24,7 +24,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-         const  SizedBox(
+          const SizedBox(
             height: 18,
           ),
           const BackButton(),
@@ -32,14 +32,90 @@ class _ProductDetailsState extends State<ProductDetails> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                 Text(
+              children: [
+                const Text(
                   "Category",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                 ),
+                const SizedBox(
+                  height: 18,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      flex: 3,
+                      child: Text(
+                        "Lorem Ipsum",
+                        textAlign: TextAlign.start,
+                        style: titleStyle,
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: RichText(
+                        text: const TextSpan(
+                            text: '\$',
+                            style: TextStyle(
+                                fontSize: 25,
+                                color: Color.fromARGB(32, 222, 12, 82)),
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: "168.00",
+                                  style: TextStyle(
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.bold)),
+                            ]),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 18,
+                ),
               ],
             ),
-          )
+          ),
+          SizedBox(
+              height: size.height * 0.4,
+              child: Swiper(itemBuilder: (BuildContext context, int index) {
+                return FancyShimmerImage(
+                  width: double.infinity,
+                  imageUrl: "https://placeimg.com/640/480/any",
+                  boxFit: BoxFit.fill,
+                );
+              },
+              autoplay: true,
+              itemCount: 3,
+              pagination: const SwiperPagination(
+                alignment: Alignment.bottomCenter,
+                builder: DotSwiperPaginationBuilder(
+                  color: Colors.white,
+                  activeColor: Colors.red,
+                ),
+              ),
+              ),
+              ),
+              const SizedBox(
+                height: 18,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Description', style: titleStyle),
+                    const SizedBox(
+                      height: 18,
+                    ),
+                    const Text(
+                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(fontSize: 25),
+                    )
+                  ],
+                ),
+              )
         ],
       ),
     )));

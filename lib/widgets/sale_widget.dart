@@ -11,7 +11,7 @@ class SaleWidget extends StatelessWidget{
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
         gradient: const LinearGradient(colors:[
-          Color(0xFF7A60A5),
+          Color.fromARGB(255, 193, 184, 59),
           Color(0xFF82C3DF)
         ],
         begin: FractionalOffset(0.0, 0.0),

@@ -13,7 +13,7 @@ class FeedsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProductsModel productsModelProvider =
+    final productsModelProvider =
         Provider.of<ProductsModel>(context);
     Size size = MediaQuery.of(context).size;
     return Padding(
@@ -28,8 +28,8 @@ class FeedsWidget extends StatelessWidget {
                   context,
                   PageTransition(
                     type: PageTransitionType.fade,
-                    child: const ProductDetails(
-                      id: 'product',
+                    child: ProductDetails(
+                      id: productsModelProvider.id.toString(),
                     ),
                   ),
                 );

@@ -1,16 +1,18 @@
 # shop_app
 
-A new Flutter project.
+A flutter application that uses fake API
+
 
 ## Getting Started
+<br>
+To find the API I used for this project here is the link https://fakeapi.platzi.com/
+<br>
+The project basically covers important areas in flutter that is API handling, how to work with widgets among others.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Usage
+Clone the project.
+After cloning run the project in your computer
+<pre><code>flutter pub get</code></pre>
+Then, finally
+<pre><code>flutter run`</code></pre>
+You're good to go.

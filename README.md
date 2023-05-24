@@ -1,4 +1,4 @@
-# shop_app
+# Store App
 
 A flutter application that uses fake API
 

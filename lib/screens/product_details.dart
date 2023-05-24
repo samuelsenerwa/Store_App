@@ -20,10 +20,19 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   final titleStyle = const TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
-
+  bool isError = false;
+  String errorStr = "";
   ProductsModel? productsModel;
   Future<void> getProductInfo() async {
-    productsModel = await APIHandler.getProductById(id: widget.id);
+    try {
+      productsModel = await APIHandler.getProductById(id: widget.id);
+    } catch (error) {
+      error.toString();
+      isError = true;
+    errorStr = error.toString();
+    }
+
+    
   }
 
   @override
@@ -37,9 +46,13 @@ class _ProductDetailsState extends State<ProductDetails> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         body: SafeArea(
-            child: productsModel == null
-                ? const Center(
-                    child: CircularProgressIndicator(),
+            child: isError
+                ? Center(
+                    child: Text(
+                      "An error occured $errorStr",
+                      style:
+                          const TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                    ),
                   )
                 : SingleChildScrollView(
                     child: Column(
@@ -56,7 +69,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                productsModel!.category.toString(),
+                                productsModel!.category!.name.toString(),
                                 style: const TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.w500),
                               ),

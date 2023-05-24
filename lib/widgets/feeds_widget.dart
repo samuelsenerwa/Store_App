@@ -1,10 +1,11 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app/consts/global_colors.dart';
+import 'package:shop_app/models/products_model.dart';
 import 'package:shop_app/screens/product_details.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:path_provider/path_provider.dart';
 import '../screens/product_details.dart';
 
 class FeedsWidget extends StatelessWidget {
@@ -12,8 +13,8 @@ class FeedsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productsModelProvider = Provider.of<ProductsModel>(context);
-
+    final ProductsModel productsModelProvider =
+        Provider.of<ProductsModel>(context);
     Size size = MediaQuery.of(context).size;
     return Padding(
         padding: const EdgeInsets.all(2.0),
@@ -27,8 +28,9 @@ class FeedsWidget extends StatelessWidget {
                   context,
                   PageTransition(
                     type: PageTransitionType.fade,
-                    child:
-                        ProductDetails(id: productsModelProvider.id.toString()),
+                    child: const ProductDetails(
+                      id: 'product',
+                    ),
                   ),
                 );
               },
@@ -43,12 +45,12 @@ class FeedsWidget extends StatelessWidget {
                           Flexible(
                             child: RichText(
                               text: TextSpan(
-                                  text: '\$',
+                                  text: '${productsModelProvider.price}',
                                   style: const TextStyle(
                                       color: Color.fromARGB(33, 150, 243, 1)),
                                   children: <TextSpan>[
                                     TextSpan(
-                                        text: "${productsModelProvider.price}",
+                                        text: "\$120",
                                         style: TextStyle(
                                             color: lightTextColor,
                                             fontWeight: FontWeight.w600)),
@@ -69,7 +71,7 @@ class FeedsWidget extends StatelessWidget {
                         color: Colors.red,
                         size: 28,
                       ),
-                      imageUrl: productsModelProvider.image![0],
+                      imageUrl: productsModelProvider.images![0],
                       boxFit: BoxFit.fill,
                     ),
                   ),

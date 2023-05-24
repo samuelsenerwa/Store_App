@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app/consts/global_colors.dart';
+
+import '../models/users_model.dart';
 
 class UsersWidget extends StatelessWidget {
   const UsersWidget({super.key});
@@ -11,6 +14,7 @@ class UsersWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final UsersModel usersModelProvider = Provider.of<UsersModel>(context);
     return ListTile(
       leading: FancyShimmerImage(
         height: size.height * 0.15,
@@ -21,11 +25,11 @@ class UsersWidget extends StatelessWidget {
           size: 28,
         ),
         imageUrl:
-            "https://images.pexels.com/photos/1537671/pexels-photo-1537671.jpeg",
+            usersModelProvider.avatar.toString(),
         boxFit: BoxFit.fill,
       ),
-      title: const Text("Username"),
-      subtitle: const Text("Email@email.com"),
+      title:  Text(usersModelProvider.name.toString()),
+      subtitle:  Text(usersModelProvider.email.toString()),
       trailing: Text(
         "User role",
         style: TextStyle(

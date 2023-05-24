@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:shop_app/consts/global_colors.dart';
+import 'package:shop_app/models/products_model.dart';
 import 'package:shop_app/screens/feeds_screen.dart';
 import 'package:shop_app/screens/users_screen.dart';
+import 'package:shop_app/services/api_handler.dart';
 import 'package:shop_app/widgets/appbar_icons.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:shop_app/widgets/feeds_grid.dart';
+import 'package:shop_app/widgets/feeds_widget.dart';
 import 'package:shop_app/widgets/sale_widget.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -21,6 +24,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late TextEditingController _textEditingController;
+  List<ProductsModel> productsList = [];
   @override
   void initState() {
     _textEditingController = TextEditingController();
@@ -32,6 +36,16 @@ class _HomeScreenState extends State<HomeScreen> {
     _textEditingController.dispose();
     super.dispose();
   }
+
+  // @override
+  // void didChangeDependancies() {
+  //   super.didChangeDependencies();
+  // }
+
+  // Future<void> getProducts() async {
+  //   productsList = await APIHandler.getAllProducts();
+  //   setState(() {});
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -147,19 +161,28 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-                      GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: 3,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 0.0,
-                                  mainAxisSpacing: 0.0,
-                                  childAspectRatio: 0.7),
-                          itemBuilder: (ctx, index) {
-                            return const FeedsWidget();
-                          })
+                      FutureBuilder<List<ProductsModel>>(
+                          future: APIHandler.getAllProducts(),
+                          builder: ((context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            } else if (snapshot.hasError) {
+                              Center(
+                                child:
+                                    Text("An Error occured ${snapshot.error}"),
+                              );
+                            } else if (snapshot.data == null) {
+                              const Center(
+                                child:
+                                    Text("No products Fetched"),
+                              );
+                            }
+                            return FeedsGridWidget(
+                                productsList: snapshot.data!);
+                          }))
                     ]),
                   ),
                 )
